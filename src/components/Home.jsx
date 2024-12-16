@@ -58,22 +58,22 @@ const Home = () => {
 
   const [heroCards] = useState([
     {
-      title: "Empower Your Play, Earn Rewards, and Shape the Future of AI",
+      title: "Stake.City",
       description:
-        "Play exciting games, earn PlayCredits, and use them in the real world with our PlayCreditCard. Welcome to the Play2Earn ecosystem – where your gameplay fuels AI development.",
-      image: "assets/image6.png",
+        "A revolutionary platform where users stake, earn, and engage in location-based tasks. Seamlessly blending innovation and gamification, Stake.city empowers users to create, complete, and verify tasks while earning rewards, turning everyday actions into impactful opportunities.",
+      image: "assets/stake.webp",
     },
     {
       title: "AI-Driven Games",
       description:
         "Our games are not just fun; they contribute to the development of cutting-edge AI models.",
-      image: "assets/image5.png",
+      image: "assets/stake1.webp",
     },
     {
       title: "Global PlayCreditCard",
       description:
         "Use your PlayCredits in the real world, just like any other debit or credit card.",
-      image: "assets/image4.png",
+      image: "assets/image6.png",
     },
   ]);
 
@@ -197,7 +197,9 @@ const Home = () => {
                   <Button
                     size="lg"
                     className="bg-blue-500 hover:bg-blue-600 text-white"
-                    onClick={() => handleSignUpClick()}
+                    onClick={() =>
+                      (window.location.href = "https://stake.city/")
+                    }
                   >
                     Start Playing
                   </Button>
