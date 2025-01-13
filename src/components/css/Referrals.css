@@ -1,250 +1,420 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300..600&display=swap");
-
-/* General Styles */
-body {
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 0;
+.referrals-container {
+  font-family: 'Arial', sans-serif;
+  padding: 30px;
+  background-color: #f4f4f4;
 }
 
-.referrals-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+.referrals-box {
+  display: flex;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: fit-content;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.referrals-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
 }
 
 /* Main Content */
-.main-content {
-  display: flex;
+main {
   margin-top: 20px;
 }
 
-.left-content {
-  flex: 1;
-  padding-right: 20px;
+.reff_h1 {
+  text-align: left;
+  color: #333;
+  font-weight: bold;
 }
 
-.right-content {
-  width: 300px;
+.content-container {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Button */
-.button-container {
+
+.reff_h3 {
+  color: #9f9f9f;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
-.referrals-button {
-  background-color: #1062fe;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  text-decoration: none;
-}
-
-.referrals-button:hover {
-  background-color: #0056b3;
-}
-
-/* Title */
-.title {
-  margin-bottom: 20px;
-}
-
-.title h1 {
-  color: #606060;
-  font-size: 1.5rem;
-}
-
-/* Instructions */
 .instructions {
-  background-color: #fffdfd;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  background-color: #ebedee;
   padding: 20px;
-  margin-bottom: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  font-size: 16px;
+  border: 2px solid #cdd2d8;
+  max-width: 600px;
 }
 
-.instructions h2 {
-  color: #696767;
-  font-size: 22px;
-  margin-bottom: 10px;
+.bonus-text {
+  font-size: 24px;
+  color: rgb(46, 46, 137);
+}
+
+.instructions {
+  margin-top: 20px;
 }
 
 .instructions ol {
-  padding-left: 20px;
+  padding-left: 0;
 }
 
 .instructions li {
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
-  color: #696767;
-  font-weight: 600;
-  font-size: 18px;
 }
 
-/* Referral Code */
+.number-circle {
+  background-color: #add8e6;
+  color: #007bff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
 .referral-code {
-  background-color: #dfebfb;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  max-width: 600px;
 }
 
-.referral-code h2 {
-  color: #0462ff;
-  font-size: 20px;
+.referral-code h4 {
+  font-size: 18px;
+  color: #333;
 }
 
-.code {
-  background-color: #f0f7fe;
+.code-box {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.code-box span {
+  flex: 1;
+  font-weight: bold;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.refrall_btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.refrall_btn:hover {
+  background-color: #0056b3;
+}
+
+.bonus-text {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.referral-code-container {
+  background-color: #add8e6;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 620px;
+}
+
+.code-box {
+  display: flex;
+  justify-content: center;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  padding: 10px;
   margin: 10px 0;
 }
 
-.copy-button {
-  background-color: #1062fe;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 50px;
-  border: none;
-  font-weight: 600;
+.code-box span {
+  font-weight: bold;
+  color: #333;
   font-size: 16px;
+}
+
+.copy-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 14px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  width: fit-content;
+  max-width: 200px;
 }
 
 .copy-button:hover {
   background-color: #0056b3;
 }
 
-/* Bonus Code */
-.bonus-code {
-  margin-bottom: 20px;
+.copy-button svg {
+  margin-right: 5px;
 }
 
-.bonus-code h3 {
-  color: #0462ff;
-  font-size: 16px;
+/* Summary Box */
+.summary-container {
+  margin-top: 25px;
 }
 
-/* Summary */
+.summary-container h4 {
+  color: rgb(150, 149, 149);
+  /* Change text color to light grey */
+  font-size: 24px;
+  /* Make font size bigger */
+  font-weight: bold;
+}
+
 .summary {
-  background-color: #d9efff;
-  border-radius: 4px;
-  padding: 20px;
-}
-
-.summary h6 {
-  color: #606060;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.summary-details {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 600px;
 }
 
-.referred-friends,
-.bonus-earned {
+.summary-item {
+  background-color: #add8e6;
+  padding: 15px;
+  border-radius: 10px;
+  flex: 1;
   text-align: center;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+
 }
 
-.detail {
+.summary-item span:first-child {
+  display: block;
+  font-weight: bold;
+}
+
+.summary-item span:last-child {
+  display: block;
+  font-weight: normal;
+}
+
+.summary-container {
+  margin-top: 15px;
+}
+
+.summary-illustrations-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
 }
 
-.icon {
-  width: 30px;
-  height: 30px;
+
+/* Illustrations */
+.summary-illustrations-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 0;
+}
+
+.summary-container {
+  flex: 1;
   margin-right: 10px;
 }
 
-/* Images */
-.large-image {
-  width: 100%;
-  max-width: 300px;
-  margin-bottom: 20px;
+.summary-item span:last-child {
+  display: block;
+  font-size: 32px;
+  color: blue;
+  font-weight: bold;
 }
 
-.image-group {
+
+/* Illustrations */
+.illustrations {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: -550px;
 }
 
-.medium-image {
-  width: 48%;
-  height: auto;
+.illustrations img {
+  width: 300;
+  max-width: 300;
+  margin: 25px 0;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .right-content {
-    display: none;
-  }
 
-  .left-content {
-    padding-right: 0;
-  }
+.checklist-image {
+  position: relative;
+  left: -50px;
+  width: 200px;
+  max-width: 300px;
+  top: -150px;
 }
 
+.cards-image {
+  position: relative;
+  left: -300px;
+  width: 300px;
+  max-width: 300px;
+  top: -50px;
+}
+
+/* Base Styles for Larger Screens */
+.checklist-image {
+  position: relative;
+  left: -50px;
+  /* Moves the image to the left */
+  width: 300px;
+  max-width: 300px;
+  margin-top: 700px;
+  /* Adjust this value as needed */
+}
+
+.cards-image {
+  position: relative;
+  left: -300px;
+  /* Moves the image to the left */
+  width: 300px;
+  max-width: 300px;
+}
+
+.illustrations img {
+  width: 300px;
+  /* Set width of images */
+  max-width: 300px;
+  /* Control maximum size */
+  margin: 25px 0;
+  /* Space between images */
+}
+
+/* Base Styles for Larger Screens */
+.checklist-image {
+  position: relative;
+  left: -50px;
+  /* Moves the image to the left */
+  width: 300px;
+  max-width: 300px;
+  margin-top: 700px;
+  /* Adjust this value as needed */
+}
+
+.cards-image {
+  position: relative;
+  left: -300px;
+  /* Moves the image to the left */
+  width: 300px;
+  max-width: 300px;
+}
+
+.illustrations img {
+  width: 300px;
+  /* Set width of images */
+  max-width: 300px;
+  /* Control maximum size */
+  margin: 25px 0;
+  /* Space between images */
+}
+
+/* Base Styles for Larger Screens */
+.checklist-image {
+  position: relative;
+  left: -50px;
+  /* Moves the image to the left */
+  width: 300px;
+  max-width: 300px;
+  margin-top: 700px;
+  /* Adjust this value as needed */
+}
+
+.cards-image {
+  position: relative;
+  left: -300px;
+  /* Moves the image to the left */
+  width: 300px;
+  max-width: 300px;
+}
+
+.illustrations img {
+  width: 300px;
+  /* Set width of images */
+  max-width: 300px;
+  /* Control maximum size */
+  margin: 25px 0;
+  /* Space between images */
+}
+
+/* Media Queries for Mobile (screens with max-width: 768px) */
 @media (max-width: 768px) {
-  .main-content {
+
+  .checklist-image,
+  .cards-image,
+  .illustrations img,
+  .illustrations {
+    display: none;
+    /* Hide images and container in mobile view */
+  }
+
+  /* Adjust the Summary Layout for Mobile */
+  .summary {
     flex-direction: column;
+    align-items: center;
+    gap: 15px;
   }
 
-  .title h1 {
-    font-size: 1.2rem;
+  /* Adjust text size and layout */
+  .summary-item span:last-child {
+    font-size: 24px;
+    color: blue;
   }
 
-  .instructions h2 {
-    font-size: 18px;
+  /* New CSS for arranging boxes next to each other */
+  .refer-bonus-container {
+    display: flex;
+    flex-direction: row;
+    /* Align boxes horizontally */
+    justify-content: center;
+    /* Center the boxes horizontally */
+    gap: 15px;
+    /* Space between the boxes */
   }
 
-  .instructions li {
-    font-size: 16px;
-  }
-
-  .referral-code h2 {
-    font-size: 18px;
-  }
-
-  .summary-details {
-    flex-direction: column;
-  }
-
-  .referred-friends,
+  .refer-to-a-friend,
   .bonus-earned {
-    margin-bottom: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .referrals-page {
+    flex: 1;
+    /* Allows the boxes to grow and shrink equally */
+    max-width: 45%;
+    /* Adjust width as needed */
     padding: 10px;
-  }
-
-  .title h1 {
-    font-size: 1rem;
-  }
-
-  .instructions h2 {
-    font-size: 16px;
-  }
-
-  .instructions li {
-    font-size: 14px;
-  }
-
-  .referral-code h2 {
-    font-size: 16px;
-  }
-
-  .copy-button {
-    font-size: 14px;
-    padding: 8px 16px;
+    /* Add padding inside the boxes */
+    box-sizing: border-box;
+    /* Includes padding in the width calculation */
   }
 }

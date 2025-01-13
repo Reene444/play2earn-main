@@ -23,7 +23,7 @@ const ConnectWalletButton = () => {
         const API_BASE_URL =
           process.env.NODE_ENV === "development"
             ? "http://localhost:5002"
-            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+            : "https://sjq6s9ict5.execute-api.eu-north-1.amazonaws.com/dev";
 
         const apiUrl = `${API_BASE_URL}`;
 

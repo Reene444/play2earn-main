@@ -1,0 +1,8 @@
+torch
+Flask
+Flask_cors
+numpy
+bs4
+easyocr
+requests
+nltk

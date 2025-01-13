@@ -1,6 +1,28 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
+// task progress (mit prajapati)
+const TaskProgressSchema = new mongoose.Schema({
+  task: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Task',
+      required: true
+  },
+  status: {
+      type: String,
+      enum: ['not-started', 'in-progress', 'completed'],
+      default: 'not-started'
+  },
+  score: {
+      type: Number,
+      default: 0
+  },
+  lastUpdated: {
+      type: Date,
+      default: Date.now
+  }
+});
+
 const UserSchema = new mongoose.Schema(
   {
     // mit prajapati (auth)
@@ -64,12 +86,16 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
 
-    token: {
+    int_userId: {
       type: String,
       unique: true,
     },
+    // mit prajapati (user progress)
+    taskProgress: [TaskProgressSchema] // Array of task progress sub-documents
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+// module.exports = mongoose.model("User", UserSchema);
+// user progress (mit prajapati)
+module.exports = mongoose.models.User || mongoose.model('User', UserSchema);

@@ -1,0 +1,182 @@
+/* Button styles */
+.btn-primary, .btn-secondary {
+    padding: 1rem 2.5rem; /* Increased padding for bigger buttons */
+    border-radius: 35px; /* More rounded corners */
+    font-size: 1.2rem; /* Larger font size */
+    font-weight: 700; /* Bolder text */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Primary Button Styles */
+  .btn-primary {
+    background-color: #5d55ea; /* New primary color */
+    color: white;
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.5); /* Enhanced shadow */
+  }
+  
+  .btn-primary:hover {
+    background-color: #4338CA; /* Darker shade on hover */
+    transform: scale(1.1);
+  }
+  
+  /* Secondary Button Styles */
+  .btn-secondary {
+    background-color: transparent;
+    border: 2px solid #4F46E5; /* Updated border color */
+    color: #4F46E5; /* Text color matching border */
+  }
+  
+  .btn-secondary:hover {
+    background-color: #E0E7FF; /* Light background on hover */
+    transform: scale(1.1);
+  }
+  
+  /* Button entry animation */
+  .animate-button {
+    opacity: 0;
+    transform: translateY(40px); /* Increased entry movement */
+    animation: fadeInButton 1.5s ease-out forwards;
+  }
+  
+  @keyframes fadeInButton {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Custom hover animations */
+  .btn-primary:hover::after,
+  .btn-secondary:hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: inherit;
+    animation: ripple 0.6s linear;
+  }
+  
+  @keyframes ripple {
+    from {
+      opacity: 0.5;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 0;
+      transform: scale(2);
+    }
+  }
+  
+  /* Floating Circle Animation */
+  .floating-circle {
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 400px; /* Increased size */
+    height: 400px; /* Increased size */
+    background-color: #4F46E5; /* New color */
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: floatCircle 15s infinite ease-in-out;
+  }
+  
+  /* Floating Icons */
+  .icon {
+    font-size: 3rem; /* Increased icon size */
+    color: #4F46E5; /* Updated color */
+  }
+  
+  /* Text Animation and Color */
+  .animated-header-text {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    animation: textMove 5s infinite linear;
+  }
+  
+  @keyframes textMove {
+    0% {
+      transform: translateX(0);
+      color: #000;
+    }
+    50% {
+      transform: translateX(-10px);
+      color: #0072ff;
+    }
+    100% {
+      transform: translateX(0);
+      color: #ff007f;
+    }
+  }
+  
+  .highlight-text {
+    color: #F97316; /* Vibrant color */
+    animation: textGlow 1.5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes textGlow {
+    from {
+      text-shadow: 0 0 12px rgba(255, 105, 180, 0.8);
+    }
+    to {
+      text-shadow: 0 0 24px rgba(255, 105, 180, 1);
+    }
+  }
+  
+  /* Other animations */
+  .bounce-animation {
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  /* Style for circled numbers */
+.circled-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    border-radius: 50%;
+    background-color: #e2e8f0; /* Light background color */
+    color: #ff8800; /* Text color */
+    font-size: 1.5rem; /* Text size */
+    font-weight: bold; /* Bold text */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  /* Hover bounce effect */
+  .hover-bounce:hover {
+    animation: hoverBounce 0.6s ease-out;
+  }
+  
+  @keyframes hoverBounce {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  

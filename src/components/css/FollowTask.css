@@ -1,9 +1,11 @@
 /* FollowTask.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap");
+
 .follow-task-wrapper {
   /* Styles for the gradient background */
-  background: linear-gradient(45deg, #0099ff, #6a00ff);
+  background-image: url("/src/components/images/background2.jpg");
+  background-size: cover;
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -13,21 +15,22 @@
 }
 
 .follow-task-wrapper .follow-task-container {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --text-color: #2c3e50;
-  --card-background: rgba(255, 255, 255, 0.95);
+  --primary-color: #ff79e9;
+  --secondary-color: #02fefd;
+  --text-color: #ffffff;
+  --card-background: #311a52dc;
   --card-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   --transition-speed: 0.3s;
 
-  font-family: 'Poppins', sans-serif;
+  font-family: "Silkscreen", sans-serif;
   color: var(--text-color);
   max-width: 800px;
   width: 95%;
   margin: 20px auto;
   padding: 30px;
   background-color: var(--card-background);
-  border-radius: 20px;
+  border: 5px solid #fedb54;
+  border-radius: 0px;
   box-shadow: var(--card-shadow);
   transition: all var(--transition-speed) ease;
   backdrop-filter: blur(10px);
@@ -35,14 +38,25 @@
   overflow-x: hidden;
 }
 
+.silkscreen-regular {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.silkscreen-bold {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .follow-task-container h2 {
   text-align: center;
-  font-weight: 800;
-  font-size: 40px;
+  font-size: 50px;
   margin-bottom: 25px;
   text-transform: uppercase;
   letter-spacing: 3px;
-  background: linear-gradient(45deg, #0099ff, #6a00ff);
+  background: linear-gradient(45deg, #02fefd, #ffffff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -51,7 +65,7 @@
 }
 
 .follow-task-container .total-points {
-  text-align: right;
+  text-align: center;
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 25px;
@@ -63,11 +77,12 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 30px;
 }
 
 .follow-task-container .task-item {
   background-color: var(--card-background);
-  border-radius: 12px;
+  border-radius: 0px;
   overflow: hidden;
   transition: all var(--transition-speed) ease;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -86,7 +101,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  /*padding: 10px;*/
   cursor: pointer;
   transition: background-color var(--transition-speed) ease;
 }
@@ -109,21 +124,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background-color: rgba(240, 240, 240, 0.5);
+  border-radius: 0;
   transition: all var(--transition-speed) ease;
   flex-shrink: 0;
 }
 
-.follow-task-container .platform-icon.twitter { color: #1DA1F2; }
-.follow-task-container .platform-icon.linkedin { color: #0077B5; }
-.follow-task-container .platform-icon.telegram { color: #0088cc; }
-.follow-task-container .platform-icon.youtube { color: #FF0000; }
-.follow-task-container .platform-icon.instagram { color: #E4405F; }
-.follow-task-container .platform-icon.tiktok { color: #000000; }
+.follow-task-container .platform-icon.twitter {
+  color: #1da1f2;
+}
+.follow-task-container .platform-icon.linkedin {
+  color: #0077b5;
+}
+.follow-task-container .platform-icon.telegram {
+  color: #0088cc;
+}
+.follow-task-container .platform-icon.youtube {
+  color: #ff0000;
+}
+.follow-task-container .platform-icon.instagram {
+  color: #e4405f;
+}
+.follow-task-container .platform-icon.tiktok {
+  color: #000000;
+}
 
 .follow-task-container .account-name {
-  font-weight: 600;
+  font-weight: 200;
   font-size: 16px;
   white-space: nowrap;
   overflow: hidden;
@@ -150,7 +176,7 @@
 .follow-task-container .upload-button {
   padding: 8px 16px;
   border: none;
-  border-radius: 20px;
+  border-radius: 0px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -168,7 +194,7 @@
 }
 
 .follow-task-container .follow-button:hover {
-  background-color: #2980b9;
+  background-color: #a84f99;
   transform: translateY(-2px);
   box-shadow: 0 5px 10px rgba(52, 152, 219, 0.3);
 }
@@ -179,7 +205,7 @@
 }
 
 .follow-task-container .upload-button:hover {
-  background-color: #27ae60;
+  background-color: #019191;
   transform: translateY(-2px);
   box-shadow: 0 5px 10px rgba(46, 204, 113, 0.3);
 }
@@ -232,16 +258,16 @@
 
 .follow-task-container .notification {
   position: fixed;
-  top: 20px;  /* Changed from bottom to top */
+  top: 20px; /* Changed from bottom to top */
   right: 20px;
   padding: 15px 20px;
-  border-radius: 8px;
+  border-radius: 0;
   color: white;
   font-weight: 600;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   animation: follow-task-slideIn 0.3s ease-out;
-  max-width: 300px;  /* Added max-width to limit the notification width */
+  max-width: 300px; /* Added max-width to limit the notification width */
 }
 
 .follow-task-container .notification.success {
@@ -258,7 +284,7 @@
 
 @keyframes follow-task-slideIn {
   from {
-    transform: translateY(-100%);  /* Changed from translateX to translateY */
+    transform: translateY(-100%); /* Changed from translateX to translateY */
     opacity: 0;
   }
   to {
@@ -276,7 +302,7 @@
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 30px;
-  border-radius: 15px;
+  border-radius: 0px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   max-width: 400px;
@@ -328,7 +354,7 @@
 .follow-task-container .share-buttons button {
   padding: 8px 16px;
   border: none;
-  border-radius: 20px;
+  border-radius: 0px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -344,12 +370,12 @@
 }
 
 .follow-task-container .share-buttons button:nth-child(1) {
-  background-color: #1DA1F2;
+  background-color: #1da1f2;
   color: white;
 }
 
 .follow-task-container .share-buttons button:nth-child(2) {
-  background-color: #25D366;
+  background-color: #fedb54;
   color: white;
 }
 
@@ -521,4 +547,3 @@
     margin-bottom: 5px;
   }
 }
-

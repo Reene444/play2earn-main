@@ -26,6 +26,7 @@
 .survey-header h1 {
   margin: 0;
   font-size: 2.5em;
+  color: #fff;
 }
 
 .survey-header p {
@@ -33,8 +34,8 @@
   font-size: 1.2em;
   align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding-left: 290px;
+  align-items: left;
+  text-align: center;
 }
 
 .header-content {
@@ -56,7 +57,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: center; /* Centers the cards horizontally */
+  padding: 10px;
 }
 
 .task-card {
@@ -73,6 +76,15 @@
   justify-content: space-between;
 }
 
+.tasks-container .card {
+  width: 90%; /* Sets width to 90% of the screen for flexibility */
+  max-width: 350px; /* Limits the maximum size on larger screens */
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+  border-radius: 8px; /* Rounded corners */
+  margin: 10px;
+  background-color: #fff; /* Ensure a background color for the card */
+}
 .task-card.incomplete {
   border-left: 5px solid red;
 }
@@ -122,16 +134,36 @@
 }
 
 .form-container {
-  margin-top: 20px;
+  width: 90%; /* Set a relative width to make it flexible */
+  max-width: 400px; /* Limit the maximum size */
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 15px; /* Optional padding for spacing */
+  background-color: #fff; /* Optional background color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  border-radius: 8px; /* Rounded corners */
+  text-align: left;
 }
-
+.form-container h3 {
+  font-size: 1.5em !important;
+}
+.form-container p {
+  padding-left: 0px;
+}
 .task-status {
   margin-top: auto;
-  display: flex;
   align-items: center;
+  text-align: center;
   gap: 10px;
 }
-
+.task-actions button {
+  margin-bottom: 30px;
+}
+.task-actions button:disabled {
+  flex: none; /* Disables flex auto behavior */
+  margin: 0 auto; /* Centers the button horizontally */
+  text-align: center; /* Ensures text inside the button is centered */
+  display: block; /* Ensures button takes block layout so centering works */
+}
 /* Styles for share options */
 .share-options {
   margin-top: 20px;
@@ -140,6 +172,7 @@
 
 .share-options h4 {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .share-buttons {
@@ -148,14 +181,13 @@
 }
 
 .share-buttons button {
-  display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 8px 12px;
+  gap: 2px;
+  padding: 8px 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 2px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12.5px;
   transition: background-color 0.3s;
 }
 
@@ -176,4 +208,22 @@
 .share-buttons button:nth-child(3) {
   background-color: #0088cc;
   color: white;
+}
+
+@media (min-width: 768px) {
+  .tasks-container .card {
+    width: 45%; /* On larger screens, cards take up 45% of the width */
+  }
+}
+
+@media (min-width: 1024px) {
+  .tasks-container .card {
+    width: 30%; /* On even larger screens, cards take up 30% of the width */
+  }
+}
+
+@media (max-width: 480px) {
+  .tasks-container .card {
+    width: 95%; /* On small mobile screens, the card takes up most of the screen */
+  }
 }

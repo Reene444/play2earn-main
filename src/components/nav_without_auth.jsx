@@ -6,8 +6,12 @@ import "./css/without_auth.css";
 // the component will be included in the drop down menu
 import ConnectWalletButton from "./ConnectWalletButton";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const WithoutAuth = ({ userLogOut }) => {
+  const navigate = useNavigate();
+
   const handleLogout = async (e) => {
     // e.preventDefault();
 
@@ -15,19 +19,31 @@ const WithoutAuth = ({ userLogOut }) => {
       const API_BASE_URL =
         process.env.NODE_ENV === "development"
           ? "http://localhost:5002"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+          : "https://sjq6s9ict5.execute-api.eu-north-1.amazonaws.com/dev";
 
-      const apiUrl = `${API_BASE_URL}`;
+      const apiUrl = `${API_BASE_URL}/api/users/logout`;
 
-      const logoutReq = await axios.post(`${apiUrl}/api/users/logout`);
+      const logoutReq = await axios.post(
+        `${apiUrl}`,
+        {},
+        {
+          withCredentials: true, // Ensure cookies are included in the request
+        }
+      );
+
       console.log(logoutReq.data);
-      if (logoutReq.data == "success") {
+      if (logoutReq.status == 200) {
         alert("You are successfully logged out");
+        sessionStorage.removeItem("email");
         userLogOut();
       }
     } catch (error) {
       console.log("An internal servere error happned", error);
     }
+  };
+
+  const handleProPlayerClick = () => {
+    navigate("/cv-home");
   };
 
   // localStorage.removeItem('token');
@@ -55,7 +71,12 @@ const WithoutAuth = ({ userLogOut }) => {
                 {" "}
                 <ConnectWalletButton />
               </li>
-              <li className="dropitms"> Userdashbord</li>
+              <li className="dropitms" onClick={() => handleProPlayerClick()}>
+                Pro Player
+              </li>
+              <Link className="dropitms" to="/userdash">
+                Userdashbord
+              </Link>
               <li className="dropitms" onClick={() => handleLogout()}>
                 Logout
               </li>

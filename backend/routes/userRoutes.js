@@ -17,11 +17,13 @@ const {
   requestUserPasswordReset,
   passwordSet,
 } = require("../controllers/userController");
+const cookieParser = require("cookie-parser");
+const User = require("../models/User");
 
 const router = express.Router();
 // router.use(express.json());
 
-router.get("/:id", getUserProfile);
+router.post("/user_data", getUserProfile);
 router.patch("/:id", updateUserProfile);
 router.delete("/:id", deleteUser);
 router.get("/", getAllUsers);
@@ -39,9 +41,10 @@ function generateReferralCode(firstName, lastName) {
 }
 
 router.post("/sign_up", (request, response) => {
-  const { firstName, lastName, email, password, refBy } = request.body;
+  const { firstName, lastName, username, email, password, refBy } = request.body;
 
-  const username = firstName + crypto.randomInt(100000, 999999);
+  // const username = firstName + crypto.randomInt(100000, 999999);
+  const int_userId = crypto.randomInt(10000000000, 999999999999);
   // Check if a user with the given email already exists
   UserModel.findOne({ email: email })
     .then((user) => {
@@ -60,6 +63,7 @@ router.post("/sign_up", (request, response) => {
           password,
           userRefNum,
           refBy,
+          int_userId
         })
           .then((newUser) => response.status(201).json(newUser))
           .catch((err) => {
@@ -77,26 +81,33 @@ router.post("/sign_up", (request, response) => {
 // jwt token generator for log in
 
 const tokenGenerator = (payload) => {
-  const key = "PlayToEarn001122";
-
   const exp = {
-    expiresIn: "1h",
+    expiresIn: "24h",
   };
 
-  const token = jwt.sign(payload, key, exp);
+  const token = jwt.sign(payload, process.env.JWT_SECRET, exp);
   return token;
 };
+
+// router.use(cookieParser());
 
 router.post("/log_in", (request, response) => {
   const { email, password } = request.body;
   UserModel.findOne({ email: email }).then((user) => {
     if (user) {
       if (user.password === password) {
-        const payload = { id: UserModel.username };
+        const payload = { _id: user._id};
         const uniqueToken = tokenGenerator(payload);
-        user.token = uniqueToken;
-        user.save();
-        response.json("success");
+
+        user.token = uniqueToken
+        user.save()
+        response.cookie("token", uniqueToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict',
+        })
+        response.json({ message: 'success' });
+
       } else {
         response.json("The credentials are incorrect");
       }
@@ -170,10 +181,50 @@ router.post("/passwordSet", (request, response) => {
 
 // logout
 
-router.post("/logout", (request, response) => {
-  const key = UserModel.token;
-  UserModel.deleteOne(key);
-  response.json("success");
+router.post("/logout", (req, res) => {
+  try {
+    // Clear the token cookie by setting it to an empty value with an expired date
+    res.clearCookie("token", {
+      httpOnly: true, // Make sure it's the same settings as when the cookie was set
+      secure: true, // Secure flag (if using HTTPS)
+      sameSite: "strict", // sameSite (must match the settings used when setting the cookie)
+    });
+
+    // Send a success response after clearing the cookie
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.error("Logout error:", error);
+    res
+      .status(500)
+      .json({ message: "Error during logout", error: error.message });
+  }
+});
+
+// for each referesh the token will gonna be checked
+
+router.get("/check", (req, res) => {
+  // console.log('Request received at /check');
+  // console.log('Cookies:', req.cookies);
+
+  const token = req.cookies.token;
+  try {
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "No token, authentication failed" });
+    }
+
+    const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
+    return res
+      .status(200)
+      .json({ message: "Authenticated", user: verifiedUser });
+  } catch (err) {
+    console.error("Server error:", err);
+    if (err instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({ message: "Invalid or expired token" });
+    }
+    return res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 module.exports = router;

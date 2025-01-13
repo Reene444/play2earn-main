@@ -1,0 +1,87 @@
+{
+    "1": {
+      "level": "1",
+      "search_text": "iPhone 16 release date in the UK",
+      "hint": "Look up the latest news about Apple's upcoming product releases.",
+      "equivalent_phrases": {
+        "September 13": ["September 13", "13 September", "13th September", "September 13th", "Sept 13"],
+        "iPhone 16": ["iPhone 16", "iPhone 16 Plus"]
+      }
+    },
+    "2": {
+      "level": "2",
+      "search_text": "Top 5 Most Downloaded Apps in 2024",
+      "hint": "Look for reports or articles from app stores like Google Play or Apple App Store, or tech news sources tracking app trends.",
+      "equivalent_phrases": {
+        "Instagram": ["Instagram"]
+      }
+    },
+    "3": {
+      "level": "3",
+      "search_text": "2025 FIFA World Cup Host Country",
+      "hint": "Find news articles or the official FIFA website for the latest information on future tournaments.",
+      "equivalent_phrases": {
+        "United States": ["United States"],
+        "FIFA": ["FIFA"],
+        "2025": ["2025"]
+      }
+    },
+    "4": {
+      "level": "4",
+      "search_text": "World's Largest Renewable Energy Project in 2024",
+      "hint": "Research projects related to solar, wind, or other renewable energy sources across the globe.",
+      "equivalent_phrases": {
+        "Khavda": ["Khavda"]
+      }
+    },
+    "5": {
+      "level": "5",
+      "search_text": "Top 5 Cities with the Best Mobile Internet Speed in 2024",
+      "hint": "Search for global internet speed rankings or reports from credible tech sources.",
+      "equivalent_phrases": {
+        "Ar-Rayyan, Qatar": ["Ar-Rayyan, Qatar"]
+      }
+    },
+    "6": {
+      "level": "6",
+      "search_text": "Amazon Prime Membership Price in Japan",
+      "hint": "Check regional Amazon websites or articles comparing membership prices across countries.",
+      "equivalent_phrases": {
+        "5,900": ["5,900"]
+      }
+    },
+    "7": {
+      "level": "7",
+      "search_text": "Population of the World's Smallest Country",
+      "hint": "Look for recent census data on microstates",
+      "equivalent_phrases": {
+        "Vatican City": ["Vatican City"],
+        "764": ["764"]
+      }
+    },
+    "8": {
+      "level": "8",
+      "search_text": "SpaceX Starship First Successful Manned Mission Date",
+      "hint": "Find the timeline or upcoming plans for SpaceXs Starship missions on space exploration news platforms.",
+      "equivalent_phrases": {
+        "April 20, 2023": ["April 20, 2023"]
+      }
+    },
+    "9": {
+      "level": "9",
+      "search_text": "Oldest Operating University in the World",
+      "hint": "Research the history of ancient universities still in operation today, such as those in Europe or the Middle East.",
+      "equivalent_phrases": {
+        "University of Bologna": ["University of Bologna"]
+      }
+    },
+    "10": {
+      "level": "10",
+      "search_text": "First Human Settlement on Mars Date (Prediction)",
+      "hint": "Look for predictions and statements from NASA, SpaceX, or other space agencies on Mars colonization plans.",
+      "equivalent_phrases": {
+        "2050": ["2050","2029", "2030"]
+      }
+    }
+  }
+  

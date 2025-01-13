@@ -1,19 +1,19 @@
-// TasksWeOffer.jsx
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, Award, X, CheckCircle, Star } from "lucide-react";
 
 const TaskCard = ({ task, onSelect }) => (
   <motion.div
-    whileHover={{ scale: 1.05 }}
+    whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.95 }}
     transition={{ type: "spring", stiffness: 300 }}
+    className="cursor-pointer transform transition-transform duration-300 ease-out hover:shadow-2xl"
   >
     <Card
-      className="h-full cursor-pointer overflow-hidden bg-white shadow-lg"
+      className="h-full bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg rounded-lg overflow-hidden"
       onClick={() => onSelect(task)}
     >
       <div className="relative h-48">
@@ -22,17 +22,15 @@ const TaskCard = ({ task, onSelect }) => (
           alt={task.category}
           className="w-full h-full object-cover"
         />
-        <div className="absolute top-2 right-2 bg-yellow-400 text-white px-2 py-1 rounded-full text-sm font-bold">
+        <div className="absolute top-2 right-2 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">
           {task.reward} pts
         </div>
       </div>
-      <CardContent className="p-4">
-        <CardTitle className="text-xl mb-2 text-blue-600">
-          {task.category}
-        </CardTitle>
-        <p className="text-gray-600 mb-3">{task.description}</p>
+      <CardContent className="p-4 text-white">
+        <CardTitle className="text-xl mb-2">{task.category}</CardTitle>
+        <p className="text-gray-200 mb-3">{task.description}</p>
         <div className="flex justify-between items-center text-sm">
-          <span className="flex items-center text-gray-500">
+          <span className="flex items-center">
             <Clock className="w-4 h-4 mr-1" />
             {task.duration}
           </span>
@@ -41,7 +39,7 @@ const TaskCard = ({ task, onSelect }) => (
               <Star
                 key={star}
                 className={`w-4 h-4 ${
-                  star <= task.difficulty ? "text-yellow-400" : "text-gray-300"
+                  star <= task.difficulty ? "text-yellow-400" : "text-gray-500"
                 }`}
                 fill={star <= task.difficulty ? "currentColor" : "none"}
               />
@@ -62,7 +60,7 @@ const TaskModal = ({ task, onClose, onAccept }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4"
+        className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4"
       >
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
@@ -152,20 +150,18 @@ const TasksWeOffer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Simulating API call to fetch tasks
     const fetchTasks = async () => {
-      // In a real scenario, you would fetch this data from an API
       const tasksData = [
         {
           id: 1,
           category: "Audio Transcription",
           description: "Transcribe audio files accurately",
-          thumbnail: "/assets/AUDIO Transcription.jpg ",
+          thumbnail: "/assets/AUDIO Transcription.jpg",
           duration: "10-15 mins",
           reward: 50,
           difficulty: 4,
           instructions:
-            "Listen to the audio file and transcribe its content accurately. Pay attention to speaker changes and background noises.",
+            "Listen to the audio file and transcribe its content accurately.",
         },
         {
           id: 2,
@@ -207,14 +203,8 @@ const TasksWeOffer = () => {
     fetchTasks();
   }, []);
 
-  const handleTaskSelect = (task) => {
-    setSelectedTask(task);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedTask(null);
-  };
-
+  const handleTaskSelect = (task) => setSelectedTask(task);
+  const handleCloseModal = () => setSelectedTask(null);
   const handleAcceptTask = (task) => {
     if (task.category === "Survey") {
       navigate("/survey");
@@ -222,6 +212,8 @@ const TasksWeOffer = () => {
       navigate("/Wordify");
     } else if (task.category === "Audio Transcription") {
       navigate("/AudioTranscription");
+    } else if (task.category === "Translation Challenge"){
+      navigate("/translation")
     }
     setSelectedTask(null);
   };
@@ -229,10 +221,10 @@ const TasksWeOffer = () => {
   return (
     <section className="py-10 md:py-16 bg-gradient-to-b from-blue-50 to-white">
       <div className="container mx-auto px-4">
-        <h3 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-blue-800">
-          Tasks We Offer
+        <h3 className="text-3xl md:text-4xl font-bold text-center mb-8 text-blue-800">
+          Games We Offer
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {tasks.map((task) => (
             <TaskCard key={task.id} task={task} onSelect={handleTaskSelect} />
           ))}

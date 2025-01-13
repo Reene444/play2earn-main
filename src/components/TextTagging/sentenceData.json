@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "level": 1,
+      "sentence": "Apple Inc. is an American multinational technology company headquartered in Cupertino, California."
+    },
+    {
+      "id": 2,
+      "level": 2,
+      "sentence": "Yesterday, the European Union allocated €10 million for rebuilding the Notre Dame Cathedral. The new cybersecurity law was enacted at 2 PM, ensuring data protection for all citizens."
+    },
+    {
+      "id": 3,
+      "level": 3,
+      "sentence": "On Tuesday, the United Nations declared a state of emergency, allocating $5 million to aid the refugees in Syria. The Eiffel Tower in Paris will be closed for renovations. The new healthcare bill, known as the Health and Care Act 2024, was signed into law by President Biden at 3 PM."
+    },
+    {
+      "id": 4,
+      "level": 4,
+      "sentence": "The Federal Reserve announced an interest rate hike yesterday, impacting the financial markets significantly. Apple Inc. launched the new iPhone 15 in San Francisco, California. Elon Musk's SpaceX successfully completed a mission to the International Space Station."
+    },
+    {
+      "id": 5,
+      "level": 5,
+      "sentence": "Google, headquartered in Mountain View, California, unveiled its latest AI technology. The World Health Organization declared a global health emergency due to the new virus outbreak. Amazon announced a new partnership with the United Nations to deliver aid to remote areas."
+    },
+    {
+      "id": 6,
+      "level": 6,
+      "sentence": "Microsoft, based in Redmond, Washington, reported a significant increase in quarterly profits. The European Space Agency launched a new satellite from French Guiana. The International Monetary Fund released its global economic outlook report, highlighting growth in developing countries."
+    },
+    {
+      "id": 7,
+      "level": 7,
+      "sentence": "Tesla, led by CEO Elon Musk, announced the opening of a new Gigafactory in Berlin, Germany. The United Nations Security Council held an emergency meeting to address the escalating conflict in the Middle East. The Nobel Prize in Physics was awarded to researchers from MIT for their groundbreaking work in quantum mechanics."
+    },
+    {
+      "id": 8,
+      "level": 8,
+      "sentence": "IBM, headquartered in Armonk, New York, revealed its latest advancements in quantum computing. The World Bank approved a $500 million loan to support infrastructure development in Africa. NASA's Mars Rover sent back new images from the red planet, providing valuable data for future missions."
+    },
+    {
+      "id": 9,
+      "level": 9,
+      "sentence": "The United States Senate passed a comprehensive climate change bill aimed at reducing carbon emissions. The European Union implemented new data protection regulations to safeguard citizens' privacy. The International Olympic Committee announced the host city for the next Summer Games."
+    },
+    {
+      "id": 10,
+      "level": 10,
+      "sentence": "The Federal Communications Commission introduced new regulations to improve internet access in rural areas. The United Nations General Assembly adopted a resolution to promote global peace and security. The World Health Organization launched a new initiative to combat antibiotic resistance."
+    }
+  ]
+  

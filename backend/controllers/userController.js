@@ -5,17 +5,51 @@ const nodemailer = require("nodemailer");
 const { request } = require("http");
 require("dotenv").config();
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken")
 
 // Get a user's profile
 exports.getUserProfile = async (req, res) => {
+    // console.log("reached")
     try {
-        const user = await UserModel.findById(req.params.id);
-        if (!user) {
-            return res.status(404).send();
+        const token = req.cookies.token;
+
+        // Check if the token exists
+        if (!token) {
+            return res.status(401).send({ message: 'Authentication token not found.' });
         }
-        res.send(user);
+
+        // Verify and decode the token using the secret
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        // console.log(decoded)
+
+        // Extract the user ID from the token's payload
+        const id = decoded._id;  // Ensure the token has a user ID in its payload
+        // console.log(id)
+        
+        // Find the user by their ID in the database
+        const user = await UserModel.findById(id);
+
+        // If no user is found, return a 404
+        if (!user) {
+            return res.status(404).send({ message: 'User not found.' });
+        }
+
+        // Send the user data back in the response
+        // console.log(user)
+        res.json(user)
+
     } catch (error) {
-        res.status(500).send(error);
+        console.error('Error fetching user profile:', error);
+
+        // If there’s a token verification error, handle it properly
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(401).send({ message: 'Invalid token.' });
+        } else if (error.name === 'TokenExpiredError') {
+            return res.status(403).send({ message: 'Token expired. Please log in again.' });
+        }
+
+        // For any other errors, return a 500 status
+        res.status(500).send({ message: 'Internal server error.', error });
     }
 };
 
@@ -63,6 +97,7 @@ exports.deleteUser = async (req, res) => {
 
 // List all users
 exports.getAllUsers = async (req, res) => {
+    // console.log("reaced to users")
     try {
         const users = await UserModel.find();
         res.json(users);
@@ -70,3 +105,5 @@ exports.getAllUsers = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+

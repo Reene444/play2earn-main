@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AuthProvider } from "./globalStateForAuth";
 
 const LoginPopup = ({
   isOpen,
@@ -14,39 +13,63 @@ const LoginPopup = ({
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("User");
   const navigate = useNavigate();
+  const API_BASE_URL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5002"
+      : "https://sjq6s9ict5.execute-api.eu-north-1.amazonaws.com/dev";
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const endpoint =
       role === "Admin" ? "/api/admin/log_in" : "/api/users/log_in";
     try {
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5002"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
       const apiUrl = `${API_BASE_URL}${endpoint}`;
 
+      // Configure axios
+      axios.defaults.withCredentials = true;
+
       const response = await axios.post(apiUrl, {
-        email,
-        password,
+        email: email,
+        password: password,
       });
 
-      console.log(response.data);
-      if (response.data === "success") {
+      console.log(response.data.message);
+
+      if (response.data.message === "success") {
         if (role === "User") {
+          // session storage for refrall page (mit prajapati)
+
+          sessionStorage.setItem("email", email);
           userLoginStatusDone();
           onClose();
           alert("Welcome to play2earn");
         } else if (role === "Admin") {
           navigate("/dashboard");
+          onClose();
         }
       } else {
         alert("Incorrect email or password");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("An error occurred during login");
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error(error.response.data);
+        console.error(error.response.status);
+        console.error(error.response.headers);
+        alert(
+          `Login failed: ${error.response.data.message || "Unknown error"}`
+        );
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error(error.request);
+        alert("No response received from the server. Please try again.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error", error.message);
+        alert("An error occurred during login. Please try again.");
+      }
     }
   };
 

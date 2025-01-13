@@ -392,6 +392,11 @@ body {
   padding: 10px;
   margin: 20px;
 }
+.wordify-popup button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+}
 
 .wordify-button-container {
   position: relative;
@@ -450,6 +455,25 @@ body {
   width: 400px;
   box-shadow: 0 0 20px rgba(255, 230, 0, 0.3);
   color: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; /* Adjust width as needed */
+  max-width: 400px; /* Set a maximum width */
+  max-height: 80vh; /* Set maximum height relative to viewport */
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto; /* Ensure scroll for vertical overflow */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+.wordify-popup-content {
+  max-height: calc(
+    80vh - 40px
+  ); /* Ensure the content is not taller than the popup */
+  overflow-y: auto; /* Scroll within the content area if necessary */
 }
 
 .wordify-popup h3 {
@@ -490,7 +514,7 @@ body {
 }
 
 .wordify-share-button {
-  padding: 10px 15px;
+  padding: 5px 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -500,6 +524,12 @@ body {
   justify-content: center;
   transition: transform 0.2s;
 }
+.wordify-share-buttons button {
+  padding: 1px 1px; /* Adjust the padding to make buttons smaller */
+  font-size: 12.5px; /* Optionally adjust the font size as well */
+  width: calc(100% - 15px); /* Reduce width by 5px */
+  height: calc(100% - 15px); /* Reduce height by 5px */
+}
 
 .wordify-share-button svg {
   margin-right: 5px;
@@ -508,16 +538,22 @@ body {
 .wordify-twitter {
   background-color: #1da1f2;
   color: white;
+  width: calc(100% - 15px); /* Reduce width by 5px */
+  height: calc(100% - 15px); /* Reduce height by 5px */
 }
 
 .wordify-whatsapp {
   background-color: #25d366;
   color: white;
+  width: calc(100% - 15px); /* Reduce width by 5px */
+  height: calc(100% - 15px); /* Reduce height by 5px */
 }
 
 .wordify-telegram {
   background-color: #0088cc;
   color: white;
+  width: calc(100% - 15px); /* Reduce width by 5px */
+  height: calc(100% - 15px); /* Reduce height by 5px */
 }
 
 .wordify-share-button:hover {

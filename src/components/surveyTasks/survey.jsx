@@ -26,7 +26,7 @@ function Survey() {
         const API_BASE_URL =
           process.env.NODE_ENV === "development"
             ? "http://localhost:5002"
-            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+            : "https://sjq6s9ict5.execute-api.eu-north-1.amazonaws.com/dev";
 
         const apiUrl = `${API_BASE_URL}/api/tasks`;
 
@@ -111,13 +111,13 @@ function Survey() {
     <div className="survey">
       <ToastContainer />
       <header className="survey-header">
-        <div className="header-content">
+        <div className="header-content text-white">
           <div className="header-left">
             <h1>Survey Forms Task</h1>
             <p>Complete the given survey forms to receive your points!</p>
           </div>
           <div className="header-right">
-            <h2>Your Points: {points}</h2>
+            <h2 className="text-white">Your Points: {points}</h2>
           </div>
         </div>
         <div className="tasks-container">
@@ -144,6 +144,7 @@ function Survey() {
               {showForm[index] && (
                 <div className="form-container">
                   <FormfacadeEmbed
+                    className="font-12"
                     formFacadeURL={task.formURL}
                     onSubmitForm={() => completeSurvey(index)}
                   />

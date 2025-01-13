@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { Line, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -12,7 +13,8 @@ import {
   Legend,
   Filler,
 } from "chart.js";
-import "./CSS/Analytics.css";
+import SearchableDropdown from "@/components/SearchableDropdown";
+import './CSS/Analytics.css';
 
 ChartJS.register(
   CategoryScale,
@@ -29,72 +31,81 @@ ChartJS.register(
 function Analytics() {
   const [timeRange, setTimeRange] = useState("week");
   const [taskChartType, setTaskChartType] = useState("completed");
+  const [userCount, setUserCount] = useState(null);
+  const [tasksCompleted, setTasksCompleted] = useState(null);
+  const [totalRewards, setTotalRewards] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [tasksCompletedOverTime, setTasksCompletedOverTime] = useState([]);
+  const [newUserRegistrations, setNewUserRegistrations] = useState([]);
+  const [topTasks, setTopTasks] = useState([]);
 
-  // Sample data (same as before)
-  const taskCompletionData = {
-    week: [100, 150, 120, 180, 200, 160, 190],
-    month: [500, 600, 550, 700, 650, 800, 750, 900],
-    year: [
-      5000, 5500, 6000, 5800, 6200, 6500, 7000, 6800, 7200, 7500, 7800, 8000,
-    ],
-  };
 
-  const newUserData = {
-    week: [10, 15, 12, 18, 20, 16, 19],
-    month: [50, 60, 55, 70, 65, 80, 75, 90],
-    year: [500, 550, 600, 580, 620, 650, 700, 680, 720, 750, 780, 800],
-  };
 
-  const topTasks = [
-    { name: "Task 1", completed: 500, reward: 50 },
-    { name: "Task 2", completed: 450, reward: 30 },
-    { name: "Task 3", completed: 400, reward: 40 },
-    { name: "Task 4", completed: 350, reward: 60 },
-    { name: "Task 5", completed: 300, reward: 20 },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userCountResponse = await axios.get('http://localhost:5002/api/user-count');
+        setUserCount(userCountResponse.data.count);
 
-  // Chart data and options (same as before)
-  const getLabels = (range) => {
-    switch (range) {
-      case "week":
-        return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-      case "month":
-        return [
-          "Week 1",
-          "Week 2",
-          "Week 3",
-          "Week 4",
-          "Week 5",
-          "Week 6",
-          "Week 7",
-          "Week 8",
-        ];
-      case "year":
-        return [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
-      default:
-        return [];
+        const tasksCompletedResponse = await axios.get('http://localhost:5002/api/tasks-completed');
+        setTasksCompleted(tasksCompletedResponse.data.totalTasksCompleted);
+
+        const totalRewardsResponse = await axios.get('http://localhost:5002/api/total-rewards');
+        setTotalRewards(totalRewardsResponse.data.totalRewards);
+
+        const response = await axios.get(`http://localhost:5002/api/tasks-completed-overtime?timeRange=${timeRange}`);
+        setTasksCompletedOverTime(response.data);
+
+        const newUserResponse = await axios.get('http://localhost:5002/api/new-user-registrations', {
+          params: { timeRange: timeRange }  // Pass timeRange as a query parameter
+        });
+        setNewUserRegistrations(newUserResponse.data);
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [timeRange]);
+
+  useEffect(() => {
+    const fetchTopTasks = async () => {
+      try {
+        const response = await axios.get('http://localhost:5002/api/top-tasks', {
+          params: { type: taskChartType }
+        });
+        setTopTasks(response.data);
+      } catch (error) {
+        console.error('Error fetching top tasks:', error);
+      }
+    };
+
+    fetchTopTasks();
+  }, [taskChartType]);
+
+  const getLabelsFromData = () => {
+    if (timeRange === "week") {
+      return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    } else if (timeRange === "month") {
+      const numberOfWeeks = Math.max(5, Math.ceil(tasksCompletedOverTime.length / 7));
+      return Array.from({ length: numberOfWeeks }, (_, i) => `Week ${i + 1}`);
+    } else if (timeRange === "year") {
+      return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     }
+    return [];
   };
 
-  const taskCompletionChartData = {
-    labels: getLabels(timeRange),
+  const getTaskCompletionData = (data) => {
+    return data.map(item => item.totalCompleted); // Extract the totalCompleted values for the dataset
+  };
+
+    const taskCompletionChartData = {
+    labels: getLabelsFromData(tasksCompletedOverTime),
     datasets: [
       {
         label: "Tasks Completed",
-        data: taskCompletionData[timeRange],
+        data: getTaskCompletionData(tasksCompletedOverTime),
         fill: true,
         backgroundColor: "rgba(75,192,192,0.2)",
         borderColor: "rgba(75,192,192,1)",
@@ -102,56 +113,103 @@ function Analytics() {
     ],
   };
 
+  const getNewUserLabels = () => {
+    if (timeRange === "week") {
+      return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    } else if (timeRange === "month") {
+      const numberOfWeeks = Math.max(5, Math.ceil(newUserRegistrations.length / 7));
+      return Array.from({ length: numberOfWeeks }, (_, i) => `Week ${i + 1}`);
+    } else if (timeRange === "year") {
+      return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    }
+    return [];
+  };
+  
+  const getNewUserData = (data) => {
+    return data.map(item => item.totalRegistrations); // Extract the totalRegistrations values for the dataset
+  };
+  
   const newUserChartData = {
-    labels: getLabels(timeRange),
+    labels: getNewUserLabels(),  // Get labels based on time range
     datasets: [
       {
-        label: "New Users",
-        data: newUserData[timeRange],
+        label: "New User Registrations",
+        data: getNewUserData(newUserRegistrations),  // Extract data from newUserRegistrations
         fill: false,
         borderColor: "rgba(255,99,132,1)",
       },
     ],
   };
+  // const topTasksChartData = {
+  //   labels: topTasks.map((task) => `${task.name} (${task.category})`),
+  //   datasets: [
+  //     {
+  //       label: taskChartType === "completed" ? "Games Completed" : "Game Reward",
+  //       data: topTasks.map((task) =>
+  //         taskChartType === "completed" ? task.completed : task.reward
+  //       ),
+  //       backgroundColor: "rgba(54, 162, 235, 0.5)",
+  //     },
+  //   ],
+  // };
+  // const topTasksChartData = {
+  //   labels: topTasks.map((task) => `${task.name || 'Game'} (${task.category || 'No Category'})`),
+  //   datasets: [
+  //     {
+  //       label: taskChartType === "completed" ? "Games Completed" : "Game Reward",
+  //       data: topTasks.map((task) =>
+  //         taskChartType === "completed" ? (task.completed || 0) : (task.reward || 0)
+  //       ),
+  //       backgroundColor: "rgba(54, 162, 235, 0.5)",
+  //     },
+  //   ],
+  // };
 
   const topTasksChartData = {
-    labels: topTasks.map((task) => task.name),
+    labels: topTasks.map((task, index) => {
+      const taskName = task.name || `Game ${index + 1}`;
+      const category = task.category || "No Category";
+      return `${taskName} (${category})`;
+    }),
     datasets: [
       {
-        label:
-          taskChartType === "completed" ? "Tasks Completed" : "Task Reward",
-        data: topTasks.map((task) =>
-          taskChartType === "completed" ? task.completed : task.reward
+        label: taskChartType === "completed" ? "Games Completed" : "Game Reward",
+        data: topTasks.map((task) => 
+          taskChartType === "completed" ? (task.completed || 0) : (task.reward || 0)
         ),
-        backgroundColor: "rgba(54, 162, 235, 0.5)",
+        backgroundColor: topTasks.map((task) => 
+          // Dynamically assign a color depending on the reward value, for example
+          task.reward >= 100 ? "rgba(54, 162, 235, 0.5)" : "rgba(255, 159, 64, 0.5)"
+          
+        ),
       },
     ],
   };
 
   return (
-    <div className="analytics">
-      <h2 className="mb-4">Analytics Dashboard</h2>
+    <div className="analytics-container">
+      <h2 className="page-title">Analytics Dashboard</h2>
 
-      <div className="analytics-summary">
+      <div className="summary-section">
         <div className="summary-card">
-          <h3>Total Tasks</h3>
-          <p>1000</p>
+          <h3>Total Tasks Completed</h3>
+          <p>{loading ? "Loading..." : tasksCompleted !== null ? tasksCompleted : "No Data"}</p>
         </div>
         <div className="summary-card">
           <h3>Total Users</h3>
-          <p>500</p>
+          <p>{loading ? "Loading..." : userCount !== null ? userCount : "No Data"}</p>
         </div>
         <div className="summary-card">
           <h3>Total Rewards</h3>
-          <p>25000</p>
-        </div>
-        <div className="summary-card">
-          <h3>Task Types</h3>
-          <p>15</p>
+          <p>{loading ? "Loading..." : totalRewards !== null ? totalRewards : "No Data"}</p>
         </div>
       </div>
 
-      <div className="mb-4">
+      <div className="search-section">
+        <SearchableDropdown />
+      </div>
+
+      <div className="filter-section">
         <select
           className="form-control"
           value={timeRange}
@@ -163,17 +221,25 @@ function Analytics() {
         </select>
       </div>
 
-      <div className="row charts">
-        <div className="col-lg-6 mb-4">
+      <div className="charts-section">
+        <div className="chart-card">
           <h3>Tasks Completed Over Time</h3>
-          <Line data={taskCompletionChartData} />
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <Line data={taskCompletionChartData} />
+          )}
         </div>
-        <div className="col-lg-6 mb-4">
+        <div className="chart-card">
           <h3>New User Registrations</h3>
-          <Line data={newUserChartData} />
+          {loading ? <p>Loading...</p> : <Line data={newUserChartData} />}
         </div>
-        <div className="col-lg-6 mb-4">
-          <h3>Top 5 Tasks</h3>
+        {/* <div className="chart-card">
+          <h3>Total Rewards Over Time</h3>
+          <Line data={totalRewardsChartData} />
+        </div> */}
+        <div className="chart-card">
+          <h3>Top 5 Games</h3>
           <select
             className="form-control mb-2"
             value={taskChartType}
